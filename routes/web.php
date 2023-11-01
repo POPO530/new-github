@@ -1,6 +1,10 @@
 <?php
 
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\ItemController;
+use App\Http\Controllers\OrderController;
+use App\Http\Controllers\ThanksController;
+use App\Http\Controllers\ItemDeleteController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -13,6 +17,11 @@ use Illuminate\Support\Facades\Route;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
+
+Route::get('/items', [ItemController::class, 'index'])->name("items.index");
+Route::post('/order', [OrderController::class, 'confirm'])->name("order.confirm");
+Route::post('/thanks', [ThanksController::class, 'store'])->name("thanks.store"); 
+Route::delete('/items/delete/{itemId}', [ItemDeleteController::class, 'itemDelete'])->name("items.delete");
 
 Route::get('/', function () {
     return view('welcome');
