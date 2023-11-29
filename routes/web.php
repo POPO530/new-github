@@ -18,10 +18,34 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+// Routeファサードを使用してルーティングを定義します。
+
+// GETリクエストの'/items' URLにアクセスされたときに、
+// ItemControllerのindexメソッドを呼び出します。
+// このルートはアイテムの一覧を表示するために使用されます。
+// nameメソッドでこのルートに"items.index"という名前を付けています。
+// これにより、アプリケーション内でこのルートを簡単に参照できるようになります。
 Route::get('/items', [ItemController::class, 'index'])->name("items.index");
-Route::post('/order', [OrderController::class, 'confirm'])->name("order.confirm");
-Route::post('/thanks', [ThanksController::class, 'store'])->name("thanks.store"); 
-Route::delete('/items/delete/{itemId}', [ItemDeleteController::class, 'itemDelete'])->name("items.delete");
+
+// POSTリクエストの'/order' URLにアクセスされたときに、
+// ItemControllerのconfirmメソッドを呼び出します。
+// 通常、フォームからのデータ送信やアクションのトリガーに使用されます。
+// このルートは注文の確認プロセスに使用されます。
+// "items.confirm"という名前を付けています。
+Route::post('/order', [ItemController::class, 'confirm'])->name("items.confirm");
+
+// POSTリクエストの'/thanks' URLにアクセスされたときに、
+// ItemControllerのstoreメソッドを呼び出します。
+// このルートは新しいアイテムをデータベースに保存するために使用されます。
+// "items.store"という名前を付けています。
+Route::post('/thanks', [ItemController::class, 'store'])->name("items.store"); 
+
+// DELETEリクエストの'/items/delete/{itemId}' URLにアクセスされたときに、
+// ItemControllerのdestroyメソッドを呼び出します。
+// このルートは特定のアイテムを削除するために使用されます。
+// URLの{itemId}部分は、削除するアイテムのidを指定します。
+// "items.delete"という名前を付けています。
+Route::delete('/items/delete/{itemId}', [ItemController::class, 'destroy'])->name("items.delete");
 
 Route::get('/', function () {
     return view('welcome');
